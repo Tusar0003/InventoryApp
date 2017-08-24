@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="array_quantity">
+        <item>@string/quantity_ten</item>
+        <item>@string/quantity_twenty</item>
+        <item>@string/quantity_thirty</item>
+        <item>@string/quantity_forty</item>
+        <item>@string/quantity_fifty</item>
+    </string-array>
+
+</resources>
