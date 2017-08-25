@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="4dp"
                 android:layout_toRightOf="@+id/quantity"
-                android:text="kg" />
+                android:text="kg/piece" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="4dp"
                 android:layout_toRightOf="@+id/price"
-                android:text="tk" />
+                android:text="tk per unit" />
         </RelativeLayout>
 
     </LinearLayout>

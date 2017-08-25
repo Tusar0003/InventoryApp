@@ -46,4 +46,15 @@
     <string name="editor_update_product_failed">Error with updating product</string>
 
     <string name="editor_update_product_successful">Product updated</string>
+
+    <string name="cancel">Cancel</string>
+
+    <string name="delete">Delete</string>
+
+    <string name="delete_dialog_msg">Delete this pet?</string>
+
+    <string name="editor_delete_pet_failed">Error with deleting pet</string>
+
+    <string name="editor_delete_pet_successful">Pet deleted</string>
+
 </resources>

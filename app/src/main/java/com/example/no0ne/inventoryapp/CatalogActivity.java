@@ -7,13 +7,10 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,8 +18,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.no0ne.inventoryapp.Data.ProductContract.ProductEntry;
+import com.example.no0ne.inventoryapp.Data.Utils;
 
-import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -60,7 +59,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 Uri currentProductUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI, id);
                 intent.setData(currentProductUri);
                 startActivity(intent);
-                Log.d("***NOTICE***", ""+ProductEntry.CONTENT_URI);
             }
         });
 
@@ -77,7 +75,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_insert_dummy_data:
-                //insertProduct();
+                insertProduct();
                 return true;
             case R.id.action_delete_all_product:
                 deleteAllProducts();
@@ -101,25 +99,34 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         }
         */
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.seven);
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-        byte[] imageUri = outputStream.toByteArray();
+//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.seven);
+//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+//        byte[] imageUri = outputStream.toByteArray();
+//
+//        Log.e("***NOTICE***", String.valueOf(imageUri));
 
-        Log.e("***NOTICE***", String.valueOf(imageUri));
+        Uri imageUri = Uri.parse(String.valueOf(R.drawable.seven));
+        byte[] inputData = new byte[0];
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(imageUri);
+            inputData = Utils.getBytes(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         ContentValues values = new ContentValues();
         values.put(ProductEntry.COLUMN_PRODUCT_NAME, "Chips");
         values.put(ProductEntry.COLUMN_PRODUCT_DESCRIPTION, "Potato");
         values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY, 50);
         values.put(ProductEntry.COLUMN_PRODUCT_PRICE, 15);
-        values.put(ProductEntry.COLUMN_PRODUCT_IMAGE, imageUri);
+        values.put(ProductEntry.COLUMN_PRODUCT_IMAGE, inputData);
 
         Uri uri = getContentResolver().insert(ProductEntry.CONTENT_URI, values);
     }
 
     private void deleteAllProducts() {
-
+        int rowsDeleted = getContentResolver().delete(ProductEntry.CONTENT_URI, null, null);
     }
 
     @Override

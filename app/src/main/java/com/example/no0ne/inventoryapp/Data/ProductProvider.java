@@ -27,7 +27,7 @@ public class ProductProvider extends ContentProvider {
 
     static {
         sUriMatcher.addURI(ProductContract.CONTENT_AUTHORITY, ProductContract.PATH_INVENTORY, PRODUCTS);
-        sUriMatcher.addURI(ProductContract.CONTENT_AUTHORITY, ProductContract.PATH_INVENTORY + "#", PRODUCT_ID);
+        sUriMatcher.addURI(ProductContract.CONTENT_AUTHORITY, ProductContract.PATH_INVENTORY + "/#", PRODUCT_ID);
     }
 
     public static final String LOG_TAG = ProductProvider.class.getSimpleName();
@@ -155,7 +155,7 @@ public class ProductProvider extends ContentProvider {
         }
 
         Integer price = values.getAsInteger(ProductEntry.COLUMN_PRODUCT_PRICE);
-        if (price == null) {
+        if (price == null && price < 0) {
             throw new IllegalArgumentException("Product requires price");
         }
 
@@ -207,7 +207,8 @@ public class ProductProvider extends ContentProvider {
         }
 
         if (values.containsKey(ProductEntry.COLUMN_PRODUCT_IMAGE)) {
-            String image = values.getAsString(ProductEntry.COLUMN_PRODUCT_IMAGE);
+//            String image = values.getAsString(ProductEntry.COLUMN_PRODUCT_IMAGE);
+            byte[] image = values.getAsByteArray(ProductEntry.COLUMN_PRODUCT_IMAGE);
             if (image == null) {
                 throw new IllegalArgumentException("Product requires an image");
             }

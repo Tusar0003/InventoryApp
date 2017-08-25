@@ -11,6 +11,7 @@ import java.io.InputStream;
  * Created by no0ne on 5/26/17.
  */
 public class Utils {
+
     public static byte[] getImageBytes(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
