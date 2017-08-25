@@ -86,26 +86,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     }
 
     private void insertProduct() {
-        /*Uri imageUri = Uri.parse("android.resource://" + getPackageName() + "/drawable/" + R.drawable.seven);
-
-        byte[] inputData = null;
-        InputStream inputStream;
-
-        try {
-            inputStream = getContentResolver().openInputStream(imageUri);
-            inputData = Utils.getBytes(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
-
-//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.seven);
-//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-//        byte[] imageUri = outputStream.toByteArray();
-//
-//        Log.e("***NOTICE***", String.valueOf(imageUri));
-
         Uri imageUri = Uri.parse(String.valueOf(R.drawable.seven));
         byte[] inputData = new byte[0];
         try {
@@ -133,9 +113,10 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {ProductEntry._ID,
                 ProductEntry.COLUMN_PRODUCT_NAME,
-//                ProductEntry.COLUMN_PRODUCT_DESCRIPTION };
                 ProductEntry.COLUMN_PRODUCT_QUANTITY,
-                ProductEntry.COLUMN_PRODUCT_PRICE };
+                ProductEntry.COLUMN_PRODUCT_PRICE,
+                ProductEntry.COLUMN_PRODUCT_IMAGE
+        };
 
         return new CursorLoader(this, ProductEntry.CONTENT_URI, projection, null, null, null);
     }
