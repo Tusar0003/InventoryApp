@@ -9,4 +9,3 @@ This is an empty home screen of the application. User can add product by clickin
 ## Home Screen Menu
 This is a menu in the home screen. There are two options. Either user can insert dummy data or user can delete all product.
 
-<img src="img/homeMenu.png" width="300" height="" >
