@@ -4,7 +4,7 @@ This is an offline application for shopkeepers where they can keep their product
 ## Home Screen
 This is an empty home screen of the application. User can add product by clicking on that plus(+) floating button.
 
-<img src="img/EmptyHome.png" width="300" height="" />
+<img src="img/EmptyHome.png" width="300" />
 
 ### Home Screen Menu
 This is a menu in the home screen. There are two options. Either user can insert dummy data or user can delete all product at a time.
